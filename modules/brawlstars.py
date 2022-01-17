@@ -1,6 +1,6 @@
 from .module import Module
-import httpx
 
+import httpx
 
 class BrawlStarsTrophies(Module):
     def __init__(self, tag, token):
@@ -13,6 +13,6 @@ class BrawlStarsTrophies(Module):
 
         self.tag = tag
 
-    async def get(self) -> str:
+    async def get(self):
         response = (await self.hclient.get('players/%23' + self.tag)).json()
-        return response.get('trophies', 0)
+        return response.get('trophies')

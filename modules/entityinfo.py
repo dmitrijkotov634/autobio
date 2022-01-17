@@ -1,7 +1,6 @@
 from .module import Module
 from telethon.tl.functions.users import GetFullUserRequest
 
-
 class EntityInfo(Module):
     FIRST_NAME = lambda o: o.first_name
     LAST_NAME = lambda o: o.last_name
@@ -11,5 +10,5 @@ class EntityInfo(Module):
         self.entity = entity
         self.getter = getter
 
-    async def get(self) -> str:
+    async def get(self):
         return getter(await self.client(GetFullUserRequest(self.entity)))

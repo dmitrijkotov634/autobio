@@ -9,8 +9,10 @@ API_HASH = 'c6f46b5330f5953e5201c3185337ed73'
 BRAWLSTARS_TOKEN = ''
 
 # http://www.last.fm/api/account/create
-LASTFM_KEY = '50c4da48aa16885c9e91a6d417d601e7'  # usable example key
-LASTFM_USERNAME = ''  # enter your last.fm username
+LASTFM_KEY = '50c4da48aa16885c9e91a6d417d601e7' # usable example key
+LASTFM_USERNAME = '' # enter your last.fm username
+
+PLACEHOLDER = '_'
 
 MODULES = {
     # Current time
@@ -29,8 +31,11 @@ MODULES = {
     #'trophies': BrawlStarsTrophies('9PG9RCUVY', BRAWLSTARS_TOKEN),
 
     # Iterates strings
-    'first_name': Cycle('wavecat', 'retrocat'),
-
+    #'first_name': Cycle('wavecat', 'retrocat'),
+    
+    # Ticker
+    'first_name': Ticker('retrocat ')
+    
     # LastFM now playing
     #'music': LastFm(LASTFM_KEY, LASTFM_USERNAME, 'nothing is playing now')
 }
@@ -38,7 +43,7 @@ MODULES = {
 INTERVAL = 60
 
 TEMPLATES = {
-    'about': '⌛: $time 💣: @androidsmsbomber ($members) 🔗: @CTRLIntelligence',
+    'about': '@androidsmsbomber ($members) -> @CTRLIntelligence',
     'first_name': '$first_name',
-    'last_name': None
+    'last_name': ': $time'
 }
