@@ -9,8 +9,8 @@ API_HASH = 'c6f46b5330f5953e5201c3185337ed73'
 BRAWLSTARS_TOKEN = ''
 
 # http://www.last.fm/api/account/create
-LASTFM_KEY = '50c4da48aa16885c9e91a6d417d601e7' # usable example key
-LASTFM_USERNAME = '' # enter your last.fm username
+LASTFM_KEY = '50c4da48aa16885c9e91a6d417d601e7'  # usable example key
+LASTFM_USERNAME = ''  # enter your last.fm username
 
 PLACEHOLDER = '_'
 
@@ -19,25 +19,25 @@ MODULES = {
     'time': Time('%H:%M'),
 
     # Number of blocked accounts
-    #'blocked': BlockedCount(),
+    # 'blocked': BlockedCount(),
 
     # Number of channel or group members
     'members': MembersCount('androidsmsbomber'),
 
     # About of the entity
-    #'about': EntityInfo('wavecat'),
+    # 'about': EntityInfo('wavecat'),
 
     # BrawlStars Trophies by tag
-    #'trophies': BrawlStarsTrophies('9PG9RCUVY', BRAWLSTARS_TOKEN),
+    # 'trophies': BrawlStarsTrophies('9PG9RCUVY', BRAWLSTARS_TOKEN),
 
     # Iterates strings
-    #'first_name': Cycle('wavecat', 'retrocat'),
-    
+    # 'first_name': Cycle('wavecat', 'retrocat'),
+
     # Ticker
     'first_name': Ticker('retrocat ')
-    
+
     # LastFM now playing
-    #'music': LastFm(LASTFM_KEY, LASTFM_USERNAME, 'nothing is playing now')
+    # 'music': LastFm(LASTFM_KEY, LASTFM_USERNAME, 'nothing is playing now')
 }
 
 INTERVAL = 60

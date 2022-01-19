@@ -1,10 +1,11 @@
-﻿from telethon import TelegramClient, errors
-from telethon.tl.functions.account import UpdateProfileRequest
+﻿import asyncio
+import logging
 from string import Template
 
+from telethon import TelegramClient, errors
+from telethon.tl.functions.account import UpdateProfileRequest
+
 import config
-import asyncio
-import logging
 
 logging.basicConfig(level=logging.WARNING)
 
@@ -18,18 +19,19 @@ for name, template in config.TEMPLATES.items():
     if template:
         templates[name] = Template(template)
 
+
 async def main():
     await client.start()
 
     responses = {}
     while True:
-        for name, module in config.MODULES.items():
-            response = await module.get()
-            responses[name] = response if response else config.PLACEHODER
+        for template_name, m in config.MODULES.items():
+            response = await m.get()
+            responses[template_name] = response if response else config.PLACEHOLDER
 
         result = {}
-        for name, template in templates.items():
-            result[name] = template.substitute(responses)
+        for template_name, prepared_template in templates.items():
+            result[template_name] = prepared_template.substitute(responses)
 
         if 'about' in result and len(result['about']) > 70:
             result['about'] = result['about'][:67] + '...'
@@ -42,5 +44,6 @@ async def main():
             await asyncio.sleep(e.seconds)
 
         await asyncio.sleep(config.INTERVAL)
+
 
 asyncio.run(main())

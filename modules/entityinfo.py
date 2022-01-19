@@ -1,14 +1,14 @@
-from .module import Module
+from typing import Optional, Callable
+
 from telethon.tl.functions.users import GetFullUserRequest
 
-class EntityInfo(Module):
-    FIRST_NAME = lambda o: o.first_name
-    LAST_NAME = lambda o: o.last_name
-    ABOUT = lambda o: o.about
+from .module import Module
 
-    def __init__(self, entity, getter=ABOUT):
+
+class EntityInfo(Module):
+    def __init__(self, entity, getter: Callable = lambda o: o.about):
         self.entity = entity
         self.getter = getter
 
-    async def get(self):
-        return getter(await self.client(GetFullUserRequest(self.entity)))
+    async def get(self) -> Optional[str]:
+        return self.getter(await self.client(GetFullUserRequest(self.entity)))

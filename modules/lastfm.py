@@ -1,9 +1,12 @@
-from .module import Module
+from typing import Optional
 
 import httpx
 
+from .module import Module
+
+
 class LastFm(Module):
-    def __init__(self, api_key, username):
+    def __init__(self, api_key: str, username: str):
         self.hclient = httpx.AsyncClient(
             base_url='https://ws.audioscrobbler.com/2.0',
             params={
@@ -13,8 +16,8 @@ class LastFm(Module):
                 'format': 'json'
             })
 
-    async def get(self):
-        response = await self.hclient.get('/').json()
+    async def get(self) -> Optional[str]:
+        response = (await self.hclient.get('/')).json()
         if 'error' in response:
             return
 
