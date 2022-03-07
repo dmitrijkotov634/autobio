@@ -5,7 +5,7 @@ from .module import Module
 
 
 class Time(Module):
-    def __init__(self, format_="%H:%M:%S"):
+    def __init__(self, format_: str = "%H:%M:%S"):
         self.format = format_
 
     async def get(self) -> Optional[str]:

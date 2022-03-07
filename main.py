@@ -7,7 +7,7 @@ from telethon.tl.functions.account import UpdateProfileRequest
 
 import config
 
-logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(level=logging.INFO)
 
 client = TelegramClient(config.SESSION_NAME, config.API_ID, config.API_HASH)
 
@@ -21,29 +21,29 @@ for name, template in config.TEMPLATES.items():
 
 
 async def main():
-    await client.start()
-
     responses = {}
-    while True:
-        for template_name, m in config.MODULES.items():
-            response = await m.get()
-            responses[template_name] = response if response else config.PLACEHOLDER
 
-        result = {}
-        for template_name, prepared_template in templates.items():
-            result[template_name] = prepared_template.substitute(responses)
+    async with client:
+        while True:
+            for variable_name, module_ in config.MODULES.items():
+                response = await module_.get()
+                responses[variable_name] = response if response else config.PLACEHOLDER
 
-        if 'about' in result and len(result['about']) > 70:
-            result['about'] = result['about'][:67] + '...'
-            logging.warning('Too long about')
+            result = {}
+            for template_name, prepared_template in templates.items():
+                result[template_name] = prepared_template.substitute(responses)
 
-        try:
-            await client(UpdateProfileRequest(**result))
-        except errors.FloodWaitError as e:
-            logging.warning('Flood wait for %d seconds', e.seconds)
-            await asyncio.sleep(e.seconds)
+            if 'about' in result and len(result['about']) > 70:
+                result['about'] = result['about'][:67] + '...'
+                logging.warning('Too long about')
 
-        await asyncio.sleep(config.INTERVAL)
+            try:
+                await client(UpdateProfileRequest(**result))
+            except errors.FloodWaitError as e:
+                logging.warning('Flood wait for %d seconds', e.seconds)
+                await asyncio.sleep(e.seconds)
+
+            await asyncio.sleep(config.INTERVAL)
 
 
 asyncio.run(main())
