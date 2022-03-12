@@ -8,15 +8,15 @@ from .module import Module
 
 class OpenWeatherMap(Module):
     icons = {
-        "01": "☀",
-        "02": "⛅",
-        "03": "☁",
-        "04": "☁",
-        "09": "🌧",
-        "10": "🌦",
-        "11": "⛈",
-        "13": "❄",
-        "50": "🌫"
+        "01d": "☀", "01n": "🌑",
+        "02d": "⛅", "02n": "⛅",
+        "03d": "☁", "03n": "☁",
+        "04d": "☁", "04n": "☁",
+        "09d": "🌧", "09n": "🌧",
+        "10d": "🌦", "10n": "☔",
+        "11d": "⛈", "11n": "⛈",
+        "13d": "❄", "13n": "❄",
+        "50d": "🌫", "50n": "🌫"
     }
 
     def __init__(self, app_id: str, city: str, city_id: int = None, lang: str = "ru"):
@@ -41,4 +41,4 @@ class OpenWeatherMap(Module):
         response = (
             await self.hclient.get("weather", params={"id": self.city_id, "units": "metric", "lang": self.lang})).json()
 
-        return "{}{}°C".format(OpenWeatherMap.icons[response["weather"][0]["icon"][:2]], response["main"]["temp"])
+        return "{} {}°C".format(OpenWeatherMap.icons[response["weather"][0]["icon"]], int(response["main"]["temp"]))
