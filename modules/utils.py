@@ -26,7 +26,7 @@ class Format(Value):
         self.string = pattern
         self.args = args
 
-    async def get(self, **data: Any) -> Any:
+    async def get(self, **data: Any) -> str:
         return (await Value.resolve(self.string, **data)) % tuple(
             [await Value.resolve(arg, **data) for arg in self.args])
 

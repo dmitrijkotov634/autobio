@@ -36,7 +36,7 @@ class OpenWeatherMap(Value):
                 "APPID": app_id,
             })
 
-    async def get(self, **data: Any) -> Any:
+    async def get(self, **data: Any) -> str:
         if self.city_id is None:
             response = (
                 await self.http_client.get("find", params={"q": self.city, "type": "like", "units": "metric"})).json()

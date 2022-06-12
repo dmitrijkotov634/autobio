@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Union
 
 import httpx
 
@@ -21,11 +21,13 @@ class LastFm(Value):
                 "format": "json"
             })
 
-    async def get(self, **data: Any) -> Any:
+    async def get(self, **data: Any) -> Union[str, None]:
         response = (await self.http_client.get("/")).json()
         if "error" in response:
-            return
+            return None
 
         last = response["recenttracks"]["track"][0]
         if "@attr" in last and last["@attr"]["nowplaying"] == "true":
             return f"{last['artist']['#text']} — {last['name']}"
+
+        return None

@@ -12,5 +12,5 @@ class Time(Value):
         """
         self.format = format_
 
-    async def get(self, **data: Any) -> Any:
+    async def get(self, **data: Any) -> str:
         return time.strftime(await Value.resolve(self.format, **data))

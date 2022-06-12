@@ -11,6 +11,6 @@ class MembersCount(Value):
         """
         self.entity = entity
 
-    async def get(self, **data: Any) -> Any:
+    async def get(self, **data: Any) -> int:
         return (await data["client"].get_participants(await Value.resolve(self.entity, **data),
                                                       limit=0)).total
