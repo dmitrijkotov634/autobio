@@ -12,4 +12,4 @@ class Module(metaclass=ABCMeta):
 
     @abstractmethod
     async def get(self) -> Optional[str]:
-        raise NotImplemented()
+        raise NotImplementedError()

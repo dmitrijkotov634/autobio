@@ -1,4 +1,15 @@
-from modules import *
+from modules.memberscount import MembersCount
+from modules.strings import Ticker
+from modules.time import Time
+
+"""
+from modules.supercell import BrawlStarsTrophies, ClashRoyaleTrophies
+from modules.openweathermap import OpenWeatherMap
+from modules.blockedcount import BlockedCount
+from modules.entityinfo import EntityInfo
+from modules.lastfm import LastFm
+from modules.strings import Cycle
+"""
 
 SESSION_NAME = "session"
 
