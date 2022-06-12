@@ -1,6 +1,9 @@
+from string import Template
+
 from modules.memberscount import MembersCount
-from modules.strings import Ticker
+from modules.ticker import Ticker
 from modules.time import Time
+from modules.utils import Cycle, Format
 
 """
 from modules.supercell import BrawlStarsTrophies, ClashRoyaleTrophies
@@ -8,7 +11,6 @@ from modules.openweathermap import OpenWeatherMap
 from modules.blockedcount import BlockedCount
 from modules.entityinfo import EntityInfo
 from modules.lastfm import LastFm
-from modules.strings import Cycle
 """
 
 SESSION_NAME = "session"
@@ -26,17 +28,12 @@ LASTFM_USERNAME = ""  # enter your last.fm username
 # https://openweathermap.org
 OPENWEATHERMAP_APP_ID = ""
 
-PLACEHOLDER = "_"
-
 MODULES = {
-    # Current time
-    "time": Time("%H:%M"),
-
     # Number of blocked accounts
     # "blocked": BlockedCount(),
 
     # Number of channel or group members
-    "members": MembersCount("androidsmsbomber"),
+    # "members": MembersCount("androidsmsbomber"),
 
     # About of the entity
     # "about": EntityInfo("wavecat"),
@@ -44,23 +41,36 @@ MODULES = {
     # BrawlStars Trophies by tag
     # "trophies": BrawlStarsTrophies("9PG9RCUVY", BRAWLSTARS_TOKEN),
 
-    # Iterates strings
+    # Iterates values
     # "first_name": Cycle("wavecat", "retrocat"),
-
-    # Ticker
-    "first_name": Ticker("retrocat "),
 
     # LastFM now playing
     # "music": LastFm(LASTFM_KEY, LASTFM_USERNAME),
 
     # Weather
     # "weather": OpenWeatherMap(OPENWEATHERMAP_APP_ID, "Moscow"),
+
+    "about": Cycle(Format("@androidsmsbomber (%s)", MembersCount("androidsmsbomber")), "@wavecatmeta"),
+
+    "first_name": Ticker("retrocat "),
+
+    "last_name": Time("%H:%M")
 }
 
 INTERVAL = 60
 
 TEMPLATES = {
-    "about": "@androidsmsbomber ($members) -> @CTRLIntelligence",
-    "first_name": "$first_name",
-    "last_name": ": $time"
+    # @androidsmsbomber (90000) -> @CTRLIntelligence
+    # @wavecatmeta -> -> @CTRLIntelligence
+
+    "about": Template("$about -> @CTRLIntelligence"),
+
+    # retrocat
+    # t retroca
+
+    "first_name": Template("$first_name"),
+
+    # 10:41
+
+    "last_name": Template("$last_name")
 }

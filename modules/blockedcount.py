@@ -1,11 +1,11 @@
-from typing import Optional
+from typing import Any
 
 from telethon.tl.functions.contacts import GetBlockedRequest
 
-from .module import Module
+from .value import Value
 
 
-class BlockedCount(Module):
-    async def get(self) -> Optional[str]:
-        result = await self.client(GetBlockedRequest(offset=0, limit=1))
+class BlockedCount(Value):
+    async def get(self, **data: Any) -> Any:
+        result = await data["client"](GetBlockedRequest(offset=0, limit=1))
         return result.count

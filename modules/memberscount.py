@@ -1,12 +1,18 @@
-from typing import Optional
+from typing import Any
 
-from .module import Module
+from .value import Value
 
 
-class MembersCount(Module):
-    def __init__(self, entity: str):
+class MembersCount(Value):
+    def __init__(self, entity: Any):
+        """
+        Value that gives the number of members in a group or channel
+
+        :param entity: Entity
+        """
+
         self.entity = entity
 
-    async def get(self) -> Optional[str]:
-        return str((await self.client.get_participants(self.entity,
-                                                       limit=0)).total)
+    async def get(self, **data: Any) -> Any:
+        return str((await data["client"].get_participants(await Value.resolve(self.entity, **data),
+                                                          limit=0)).total)

@@ -1,49 +1,39 @@
 ﻿import asyncio
 import logging
-from string import Template
 
 from telethon import TelegramClient, errors
 from telethon.tl.functions.account import UpdateProfileRequest
 
 import config
+from modules.value import Value
 
 logging.basicConfig(level=logging.INFO)
 
 client = TelegramClient(config.SESSION_NAME, config.API_ID, config.API_HASH)
 
-for module in config.MODULES.values():
-    module.setup(client)
-
-templates = {}
-for name, template in config.TEMPLATES.items():
-    if template:
-        templates[name] = Template(template)
-
 
 async def main():
     responses = {}
+    while True:
+        for variable, value in config.MODULES.items():
+            responses[variable] = await Value.resolve(value, client=client)
 
-    async with client:
-        while True:
-            for variable_name, module_ in config.MODULES.items():
-                response = await module_.get()
-                responses[variable_name] = response if response else config.PLACEHOLDER
+        params = {}
+        for param, template in config.TEMPLATES.items():
+            params[param] = template.substitute(responses)
 
-            result = {}
-            for template_name, prepared_template in templates.items():
-                result[template_name] = prepared_template.substitute(responses)
+        if len(params.get("about", "")) > 70:
+            params["about"] = params["about"][:67] + "..."
+            logging.warning("Too long about")
 
-            if 'about' in result and len(result['about']) > 70:
-                result['about'] = result['about'][:67] + '...'
-                logging.warning('Too long about')
+        try:
+            await client(UpdateProfileRequest(**params))
+        except errors.FloodWaitError as e:
+            logging.warning("Flood wait for %d seconds", e.seconds)
+            await asyncio.sleep(e.seconds)
 
-            try:
-                await client(UpdateProfileRequest(**result))
-            except errors.FloodWaitError as e:
-                logging.warning('Flood wait for %d seconds', e.seconds)
-                await asyncio.sleep(e.seconds)
-
-            await asyncio.sleep(config.INTERVAL)
+        await asyncio.sleep(config.INTERVAL)
 
 
-asyncio.run(main())
+with client:
+    client.loop.run_until_complete(main())

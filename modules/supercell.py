@@ -1,26 +1,33 @@
-from typing import Optional
+from typing import Any
 
 import httpx
 
-from .module import Module
+from .value import Value
 
 
-class Supercell(Module):
+class Supercell(Value):
     base_url: str
     base_key: str
 
-    def __init__(self, tag: str, token: str):
-        self.hclient = httpx.AsyncClient(
+    def __init__(self, tag: Any, api_token: str):
+        """
+        Value that stores the number of achievements in Supercell games
+
+        :param tag: Player tag
+        :param api_token: Token
+        """
+
+        self.http_client = httpx.AsyncClient(
             base_url=self.base_url,
             headers={
                 "Accept": "application/json",
-                "authorization": "Bearer " + token
+                "authorization": "Bearer " + api_token
             })
 
         self.tag = tag
 
-    async def get(self) -> Optional[str]:
-        response = (await self.hclient.get("players/%23" + self.tag)).json()
+    async def get(self, **data: Any) -> Any:
+        response = (await self.http_client.get("players/%23" + await Value.resolve(self.tag, **data))).json()
         return response.get(self.base_key)
 
 
