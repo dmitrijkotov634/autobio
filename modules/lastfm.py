@@ -12,7 +12,6 @@ class LastFm(Value):
         :param api_key: API key for last.fm service
         :param username: Last.fm username
         """
-
         self.http_client = httpx.AsyncClient(
             base_url="https://ws.audioscrobbler.com/2.0",
             params={

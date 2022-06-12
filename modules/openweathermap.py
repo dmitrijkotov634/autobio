@@ -27,7 +27,6 @@ class OpenWeatherMap(Value):
         :param city_id: City id
         :param lang: Language formatted in ISO 639-1
         """
-
         self.city = city
         self.city_id = city_id
         self.lang = lang

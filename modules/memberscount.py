@@ -9,7 +9,6 @@ class MembersCount(Value):
 
         :param entity: Entity
         """
-
         self.entity = entity
 
     async def get(self, **data: Any) -> Any:

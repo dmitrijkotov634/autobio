@@ -10,7 +10,6 @@ class Ticker(Value):
 
         :param string: String
         """
-
         self.iter = iter(cycle(range(len(string))))
         self.string = string
 

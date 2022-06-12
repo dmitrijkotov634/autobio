@@ -15,7 +15,6 @@ class Supercell(Value):
         :param tag: Player tag
         :param api_token: Token
         """
-
         self.http_client = httpx.AsyncClient(
             base_url=self.base_url,
             headers={

@@ -12,7 +12,6 @@ class EntityInfo(Value):
         :param entity: Entity
         :param getter: Function that parses the output value
         """
-
         self.entity = entity
         self.getter = getter
 

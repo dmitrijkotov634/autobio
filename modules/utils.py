@@ -10,7 +10,6 @@ class Cycle(Value):
 
         :param values: Values to be iterated
         """
-
         self.iter = iter(cycle(values))
 
     async def get(self, **data: Any) -> Any:
@@ -20,11 +19,10 @@ class Cycle(Value):
 class Format(Value):
     def __init__(self, pattern: Any, *args: Any):
         """The value that returns the formatted string
-        
+
         :param pattern: Printf-style string formatting pattern
         :param args: Arguments
         """
-
         self.string = pattern
         self.args = args
 
@@ -40,7 +38,6 @@ class Apply(Value):
         :param value: Value
         :param function: Function
         """
-
         self.values = value
         self.function = function
 

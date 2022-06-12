@@ -10,7 +10,6 @@ class Time(Value):
 
         :param format_: Time format according to 1989 C standard
         """
-
         self.format = format_
 
     async def get(self, **data: Any) -> Any:
