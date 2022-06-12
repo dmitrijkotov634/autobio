@@ -62,15 +62,12 @@ INTERVAL = 60
 TEMPLATES = {
     # @androidsmsbomber (90000) -> @CTRLIntelligence
     # @wavecatmeta -> -> @CTRLIntelligence
-
     "about": Template("$about -> @CTRLIntelligence"),
 
     # retrocat
     # t retroca
-
     "first_name": Template("$first_name"),
 
     # 10:41
-
     "last_name": Template("$last_name")
 }

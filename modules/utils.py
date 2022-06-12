@@ -1,5 +1,5 @@
 from itertools import cycle
-from typing import Any, Callable
+from typing import Any, Callable, Union
 
 from modules.value import Value
 
@@ -17,7 +17,7 @@ class Cycle(Value):
 
 
 class Format(Value):
-    def __init__(self, pattern: Any, *args: Any):
+    def __init__(self, pattern: Union[str, Value], *args: Any):
         """The value that returns the formatted string
 
         :param pattern: Printf-style string formatting pattern

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Union
 
 import httpx
 
@@ -9,7 +9,7 @@ class Supercell(Value):
     base_url: str
     base_key: str
 
-    def __init__(self, tag: Any, api_token: str):
+    def __init__(self, tag: Union[str, Value], api_token: str):
         """Value that stores the number of achievements in Supercell games
 
         :param tag: Player tag

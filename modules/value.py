@@ -4,7 +4,7 @@ from typing import Any
 
 class Value(metaclass=ABCMeta):
     @abstractmethod
-    async def get(self, **data: Any):
+    async def get(self, **data: Any) -> Any:
         raise NotImplementedError()
 
     @staticmethod
