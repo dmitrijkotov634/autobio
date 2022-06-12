@@ -38,12 +38,23 @@ class Apply(Value):
         :param value: Value
         :param function: Function
         """
-        self.values = value
+        self.value = value
         self.function = function
 
     async def get(self, **data: Any) -> Any:
-        return self.function(await Value.resolve(self.values, **data))
+        return self.function(await Value.resolve(self.value, **data))
 
 
-def placeholder(value: Any) -> Callable:
-    return lambda v: v if v else value
+class Default(Value):
+    def __init__(self, value: Any, default: Any):
+        """Returns the default value if the value is false
+
+        :param value: Value
+        :param default: Default value
+        """
+        self.value = value
+        self.default = default
+
+    async def get(self, **data: Any) -> Any:
+        data = await Value.resolve(self.value, **data)
+        return data if data else await Value.resolve(self.default, **data)
