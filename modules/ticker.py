@@ -6,8 +6,7 @@ from .value import Value
 
 class Ticker(Value):
     def __init__(self, string: str):
-        """
-        The value that gives each time the text shifted to the right
+        """The value that gives each time the text shifted to the right
 
         :param string: String
         """

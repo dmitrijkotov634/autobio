@@ -7,8 +7,7 @@ from .value import Value
 
 class EntityInfo(Value):
     def __init__(self, entity: Any, getter: Callable = lambda o: o.about):
-        """
-        Value that returns information about the entity
+        """Value that returns information about the entity
 
         :param entity: Entity
         :param getter: Function that parses the output value

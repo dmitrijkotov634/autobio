@@ -20,8 +20,7 @@ class OpenWeatherMap(Value):
     }
 
     def __init__(self, app_id: str, city: str, city_id: int = None, lang: str = "ru"):
-        """
-        Value that gives the current weather in the specified city
+        """Value that gives the current weather in the specified city
 
         :param app_id: App id for openweathermap.org
         :param city: City name

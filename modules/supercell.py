@@ -10,8 +10,7 @@ class Supercell(Value):
     base_key: str
 
     def __init__(self, tag: Any, api_token: str):
-        """
-        Value that stores the number of achievements in Supercell games
+        """Value that stores the number of achievements in Supercell games
 
         :param tag: Player tag
         :param api_token: Token

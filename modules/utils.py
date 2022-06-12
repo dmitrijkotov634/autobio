@@ -6,8 +6,7 @@ from modules.value import Value
 
 class Cycle(Value):
     def __init__(self, *values: Any):
-        """
-        A value that returns one value after another value
+        """A value that returns one value after another value
 
         :param values: Values to be iterated
         """
@@ -20,8 +19,7 @@ class Cycle(Value):
 
 class Format(Value):
     def __init__(self, pattern: Any, *args: Any):
-        """
-        The value that returns the formatted string
+        """The value that returns the formatted string
         
         :param pattern: Printf-style string formatting pattern
         :param args: Arguments
@@ -37,8 +35,7 @@ class Format(Value):
 
 class Apply(Value):
     def __init__(self, value: Any, function: Callable):
-        """
-        Applies function to value
+        """Applies function to value
 
         :param value: Value
         :param function: Function

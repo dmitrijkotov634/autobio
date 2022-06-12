@@ -5,8 +5,7 @@ from .value import Value
 
 class MembersCount(Value):
     def __init__(self, entity: Any):
-        """
-        Value that gives the number of members in a group or channel
+        """Value that gives the number of members in a group or channel
 
         :param entity: Entity
         """

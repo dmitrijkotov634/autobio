@@ -6,8 +6,7 @@ from .value import Value
 
 class Time(Value):
     def __init__(self, format_: Any = "%H:%M:%S"):
-        """
-        The value that gives the formatted current time
+        """The value that gives the formatted current time
 
         :param format_: Time format according to 1989 C standard
         """

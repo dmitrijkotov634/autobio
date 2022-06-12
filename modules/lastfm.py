@@ -7,8 +7,7 @@ from .value import Value
 
 class LastFm(Value):
     def __init__(self, api_key: str, username: str):
-        """
-        Value that gives the current track being played on last.fm
+        """Value that gives the current track being played on last.fm
 
         :param api_key: API key for last.fm service
         :param username: Last.fm username
