@@ -20,7 +20,8 @@ async def main():
 
         params = {}
         for param, template in config.TEMPLATES.items():
-            params[param] = template.substitute(responses)
+            if template:
+                params[param] = template.substitute(responses)
 
         if len(params.get("about", "")) > 70:
             params["about"] = params["about"][:67] + "..."
