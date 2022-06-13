@@ -57,7 +57,7 @@ MODULES = {
     "part": Cycle(Format("@androidsmsbomber (%s)", MembersCount("androidsmsbomber")), "@wavecatmeta")
 }
 
-INTERVAL = 60
+INTERVAL = 30
 
 TEMPLATES = {
     "first_name": Template("$first_name"),
