@@ -51,8 +51,8 @@ MODULES = {
     # Weather
     # "weather": OpenWeatherMap(OPENWEATHERMAP_APP_ID, "Moscow"),
 
-    "first_name": TextFont(Ticker("retrocat "), TextFont.fonts),
-    "last_name": TextFont(Time("%H:%M"), TextFont.numbers),
+    "first_name": TextFont(Ticker("retrocat "), TextFont.fonts()),
+    "last_name": TextFont(Time("%H:%M"), TextFont.numbers()),
 
     "part": Cycle(Format("@androidsmsbomber (%s)", MembersCount("androidsmsbomber")), "@wavecatmeta")
 }
