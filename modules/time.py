@@ -1,5 +1,5 @@
 ﻿import time
-from typing import Any, Union
+from typing import Union
 
 from .value import Value
 
@@ -12,5 +12,5 @@ class Time(Value):
         """
         self.format = format_
 
-    async def get(self, **data: Any) -> str:
+    async def get(self, **data) -> str:
         return time.strftime(await Value.resolve(self.format, **data))

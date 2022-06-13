@@ -1,4 +1,4 @@
-from typing import Any, Union
+from typing import Union
 
 import httpx
 
@@ -24,7 +24,7 @@ class Supercell(Value):
 
         self.tag = tag
 
-    async def get(self, **data: Any) -> int:
+    async def get(self, **data) -> int:
         response = (await self.http_client.get("players/%23" + await Value.resolve(self.tag, **data))).json()
         return response.get(self.base_key)
 

@@ -1,5 +1,4 @@
 from itertools import cycle
-from typing import Any
 
 from .value import Value
 
@@ -13,6 +12,6 @@ class Ticker(Value):
         self.iter = iter(cycle(range(len(string))))
         self.string = string
 
-    async def get(self, **data: Any) -> str:
+    async def get(self, **data) -> str:
         index = next(self.iter)
         return self.string[index:] + self.string[:index]

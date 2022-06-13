@@ -1,5 +1,4 @@
 import logging
-from typing import Any
 
 import httpx
 
@@ -36,7 +35,7 @@ class OpenWeatherMap(Value):
                 "APPID": app_id,
             })
 
-    async def get(self, **data: Any) -> str:
+    async def get(self, **data) -> str:
         if self.city_id is None:
             response = (
                 await self.http_client.get("find", params={"q": self.city, "type": "like", "units": "metric"})).json()

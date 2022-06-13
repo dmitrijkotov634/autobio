@@ -11,9 +11,10 @@ logging.basicConfig(level=logging.INFO)
 
 client = TelegramClient(config.SESSION_NAME, config.API_ID, config.API_HASH)
 
+responses = {}
+
 
 async def main():
-    responses = {}
     while True:
         for variable, value in config.MODULES.items():
             responses[variable] = await Value.resolve(value, client=client)

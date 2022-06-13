@@ -12,7 +12,7 @@ class Cycle(Value):
         """
         self.iter = iter(cycle(values))
 
-    async def get(self, **data: Any) -> Any:
+    async def get(self, **data) -> Any:
         return next(self.iter)
 
 
@@ -26,7 +26,7 @@ class Format(Value):
         self.string = pattern
         self.args = args
 
-    async def get(self, **data: Any) -> str:
+    async def get(self, **data) -> str:
         return (await Value.resolve(self.string, **data)) % tuple(
             [await Value.resolve(arg, **data) for arg in self.args])
 
@@ -41,7 +41,7 @@ class Apply(Value):
         self.value = value
         self.function = function
 
-    async def get(self, **data: Any) -> Any:
+    async def get(self, **data) -> Any:
         return self.function(await Value.resolve(self.value, **data))
 
 
@@ -55,6 +55,6 @@ class Default(Value):
         self.value = value
         self.default = default
 
-    async def get(self, **data: Any) -> Any:
+    async def get(self, **data) -> Any:
         data = await Value.resolve(self.value, **data)
         return data if data else await Value.resolve(self.default, **data)

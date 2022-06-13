@@ -1,4 +1,4 @@
-from typing import Any, Union
+from typing import Union
 
 import httpx
 
@@ -21,7 +21,7 @@ class LastFm(Value):
                 "format": "json"
             })
 
-    async def get(self, **data: Any) -> Union[str, None]:
+    async def get(self, **data) -> Union[str, None]:
         response = (await self.http_client.get("/")).json()
         if "error" in response:
             return None

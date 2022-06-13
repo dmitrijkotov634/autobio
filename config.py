@@ -1,6 +1,7 @@
 from string import Template
 
 from modules.memberscount import MembersCount
+from modules.textfont import TextFont
 from modules.ticker import Ticker
 from modules.time import Time
 from modules.utils import Cycle, Format
@@ -50,24 +51,16 @@ MODULES = {
     # Weather
     # "weather": OpenWeatherMap(OPENWEATHERMAP_APP_ID, "Moscow"),
 
-    "about": Cycle(Format("@androidsmsbomber (%s)", MembersCount("androidsmsbomber")), "@wavecatmeta"),
+    "first_name": TextFont(Ticker("retrocat "), TextFont.fonts),
+    "last_name": TextFont(Time("%H:%M"), TextFont.numbers),
 
-    "first_name": Ticker("retrocat "),
-
-    "last_name": Time("%H:%M")
+    "part": Cycle(Format("@androidsmsbomber (%s)", MembersCount("androidsmsbomber")), "@wavecatmeta")
 }
 
 INTERVAL = 60
 
 TEMPLATES = {
-    # @androidsmsbomber (90000) -> @CTRLIntelligence
-    # @wavecatmeta -> -> @CTRLIntelligence
-    "about": Template("$about -> @CTRLIntelligence"),
-
-    # retrocat
-    # t retroca
     "first_name": Template("$first_name"),
-
-    # 10:41
-    "last_name": Template("$last_name")
+    "last_name": Template("$last_name"),
+    "about": Template("$part -> @CTRLIntelligence")
 }

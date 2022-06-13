@@ -15,5 +15,5 @@ class EntityInfo(Value):
         self.entity = entity
         self.getter = getter
 
-    async def get(self, **data: Any) -> str:
+    async def get(self, **data) -> str:
         return self.getter(await data["client"](GetFullUserRequest(await Value.resolve(self.entity, **data))))

@@ -8,7 +8,7 @@ class Value(metaclass=ABCMeta):
         raise NotImplementedError()
 
     @staticmethod
-    async def resolve(value: Any, **data: Any) -> Any:
+    async def resolve(value: Any, **data) -> Any:
         v = value
         while isinstance(v, Value):
             v = await v.get(**data)
