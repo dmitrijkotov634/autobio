@@ -24,7 +24,17 @@ async def main():
             if template:
                 params[param] = template.substitute(responses)
 
-        if len(params.get("about", "")) > 70:
+        premium = False
+        try:
+            premium = (await client.get_me()).premium
+        except errors.FloodWaitError as e:
+            logging.warning("Flood wait for %d seconds", e.seconds)
+            await asyncio.sleep(e.seconds)
+        except AttributeError:
+            logging.info("Your Telethon version doesn't support the 'premium' parameter yet, using 70 as a maximum bio "
+                         "length")
+
+        if len(params.get("about", "")) > (140 if premium else 70):
             params["about"] = params["about"][:67] + "..."
             logging.warning("Too long about")
 
