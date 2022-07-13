@@ -30,6 +30,9 @@ async def main():
         except errors.FloodWaitError as e:
             logging.warning("Flood wait for %d seconds", e.seconds)
             await asyncio.sleep(e.seconds)
+        except AttributeError:
+            logging.info("Your Telethon version doesn't support the 'premium' parameter yet, using 70 as a maximum bio "
+                         "length")
 
         if len(params.get("about", "")) > (140 if premium else 70):
             params["about"] = params["about"][:67] + "..."
