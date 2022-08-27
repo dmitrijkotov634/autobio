@@ -29,6 +29,9 @@ LASTFM_USERNAME = ""  # enter your last.fm username
 # https://openweathermap.org
 OPENWEATHERMAP_APP_ID = ""
 
+# https://wakatime.com/api-key
+WAKATIME_API_KEY = ""
+
 MODULES = {
     # Number of blocked accounts
     # "blocked": BlockedCount(),
@@ -51,6 +54,9 @@ MODULES = {
     # Weather
     # "weather": OpenWeatherMap(OPENWEATHERMAP_APP_ID, "Moscow"),
 
+    # WakaTime
+    # "coding": WakaTime(WAKATIME_API_KEY),
+
     "first_name": TextFont(Ticker("retrocat "), TextFont.fonts()),
     "last_name": TextFont(Time("%H:%M"), TextFont.numbers()),
 
@@ -62,5 +68,5 @@ INTERVAL = 30
 TEMPLATES = {
     "first_name": Template("$first_name"),
     "last_name": Template("$last_name"),
-    "about": Template("$part -> @CTRLIntelligence")
+    "about": Template("$part ⛓ @stacat")
 }
